@@ -2,11 +2,12 @@
 by Juraj Galbavy
 modern recreation of legendary 3D demo from Amiga.
 
-The original Amiga Boing Ball demo wa presented at Winter CES show in January 1984.
+The original Amiga Boing Ball demo was crated by RJ Mical and Dale Luck and was presented at Winter CES show in January 1984. [(Source)](https://www.randelshofer.ch/animations/anims/robert_j_mical/boing3.ilbm.html)
+
 This webpage recreates it's look using three.js library.
 
-This code is using Ektogamat ThreeJS Boilerplate by Anderson Mancini.
-https://github.com/ektogamat/threejs-andy-boilerplate
+The website was made using [Ektogamat ThreeJS Boilerplate](https://github.com/ektogamat/threejs-andy-boilerplate) by Anderson Mancini.
+
 
 # Just want to look
 * Download this repo.

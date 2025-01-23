@@ -1,7 +1,6 @@
 /////////////////////////////////////////////////////////////////////////
 ///// IMPORT
 import * as THREE from "three";
-import { TWEEN } from "three/examples/jsm/libs/tween.module.min.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { CheckerSphereGeometry } from "./checkerSphereGeometry.js";
 
@@ -205,8 +204,8 @@ export function ResizeBoingBall(width, height) {
   camera.aspect = width / height;
   camera.updateProjectionMatrix();
   renderer.setSize(width, height);
-  renderer.setPixelRatio(2);
-  //renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); //set pixel ratio
+  //renderer.setPixelRatio(2);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); //set pixel ratio
 }
 
 // orbit controls for debugging

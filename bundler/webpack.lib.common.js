@@ -8,9 +8,13 @@ module.exports = {
     index: path.resolve(__dirname, "../src/script.js"),
     boingball: path.resolve(__dirname, "../src/boingball.js"),
   },
+  experiments: {
+    outputModule: true,
+  },
   output: {
     hashFunction: "xxhash64",
-    filename: "[name].bundle.js",
+    filename: "[name].lib.bundle.js",
+    library: { type: "module" },
     path: path.resolve(__dirname, "../dist"),
   },
   devtool: "source-map",

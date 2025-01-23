@@ -5,6 +5,9 @@
   "scripts": {
     "build": "webpack --config ./bundler/webpack.prod.js",
     "dev": "webpack serve --config ./bundler/webpack.dev.js",
+    "buildlib": "webpack --config ./bundler/webpack.lib.prod.js",
+    "devlib": "webpack serve --config ./bundler/webpack.lib.dev.js",
+
     "deploy": "vercel --prod"
   },
   "dependencies": {

@@ -150,20 +150,26 @@ export function SetupBoingBall(parentElement, parentW, parentH) {
   // animation parameters
   var moveDir = 1;
   var rotDir = 1;
-  var moveSpeed = 0.05;
-  var rotSpeedY = 0.04;
+  var moveSpeed = 3; // per second
+  var rotSpeedY = 2.4; // per second
   var bounceDist = 2.4;
   var bounceX = -bounceDist / 2;
   var bounceHeight = startY - endY - 2 * sphereRadius;
   var bounceK = bounceHeight / (0.25 * bounceDist * bounceDist);
   var sphereRotation = 0;
 
+  let lastTimeStamp;
+
   // animation loop
-  const animate = () => {
+  const animate = (timestamp) => {
+    const elapsed = lastTimeStamp === undefined ? 0 : timestamp - lastTimeStamp;
+    const elapsedSec = 0.001 * elapsed;
+    lastTimeStamp = timestamp;
+    const fps = elapsed == 0 ? 0 : 1000 / elapsed;
     requestAnimationFrame(animate);
 
     // horizontal movement
-    sphereGroup.position.x += moveDir * moveSpeed;
+    sphereGroup.position.x += moveDir * moveSpeed * elapsedSec;
     if (moveDir == 1) {
       if (sphereGroup.position.x > startX) {
         sphereGroup.position.x = startX;
@@ -178,12 +184,16 @@ export function SetupBoingBall(parentElement, parentW, parentH) {
       }
     }
 
-    sphereRotation += rotDir * rotSpeedY;
+    sphereRotation += rotDir * rotSpeedY * elapsedSec;
     var sphereRot = new THREE.Euler(0, sphereRotation, 0.3, "ZXY");
     sphereGroup.setRotationFromEuler(sphereRot);
 
     // vertical movement
-    bounceX += moveSpeed;
+    // vertical position is calculated from relative horizontal displacement accumulated over time.
+    // this way, we don't need to care about direction of movement of ball in X axis
+    // bounceX=0 is the highest point of bounce, bounceX = +- bounceDist/2 is the lowest point
+    // vertical position of ball is calculated using parabolic equation.
+    bounceX += moveSpeed * elapsedSec;
     if (bounceX >= bounceDist / 2) {
       bounceX = -bounceDist / 2;
     }
@@ -196,7 +206,7 @@ export function SetupBoingBall(parentElement, parentW, parentH) {
   };
 
   animate();
-}
+} // function SetupBoingBall
 
 // call on parent div resized
 export function ResizeBoingBall(width, height) {
